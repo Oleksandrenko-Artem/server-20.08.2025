@@ -1,0 +1,6 @@
+PATCH http://localhost:3000/users/68b09b9a94977e19cce37942 HTTP/1.1
+Content-Type: application/json
+
+{
+    "login": "leo55"
+}
