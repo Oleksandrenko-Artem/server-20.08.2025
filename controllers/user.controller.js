@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const User = require('../models/User');
 
 module.exports.createUser = async (req, res, next) => {
@@ -39,7 +40,7 @@ module.exports.findUserById = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.idUser);
         if (!user) {
-            return res.status(404).send({ data: 'User not found' });
+            return next(createError(404, 'User not found'));
         }
         res.status(200).send({ data: user });
     } catch (error) {
@@ -51,7 +52,7 @@ module.exports.updateUserById = async (req, res, next) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.idUser, req.body, { new: true });
         if (!updatedUser) {
-            return res.status(404).send({ data: 'User not found' });
+            return next(createError(404, 'User not found'));
         }
         res.status(200).send({ data: updatedUser });
     } catch (error) {
@@ -63,7 +64,7 @@ module.exports.deleteUserById = async (req, res, next) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.idUser);
         if (!deletedUser) {
-            return res.status(404).send({ data: 'User not found' });
+            return next(createError(404, 'User not found'));
         }
         res.status(200).send({ data: deletedUser });
     } catch (error) {

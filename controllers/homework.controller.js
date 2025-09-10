@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const Homework = require("../models/Homework");
 
 // CRUD - create, read, update, delete
@@ -35,7 +36,7 @@ module.exports.findHomeworkById = async (req, res, next) => {
     try {
         const homework = await Homework.findById(req.params.idHomework);
         if (!homework) {
-            return res.status(404).send({ data: 'Homework not found' });
+            return next(createError(404, 'Homework not found'));
         }
         res.status(200).send({ data: homework });
     } catch (error) {
@@ -47,7 +48,7 @@ module.exports.updateHomeworkById = async (req, res, next) => {
     try {
         const updatedHomework = await Homework.findByIdAndUpdate(req.params.idHomework, req.body, { new: true });
         if (!updatedHomework) {
-            return res.status(404).send({ data: 'Homework not found' });
+            return next(createError(404, 'Homework not found'));
         }
         res.status(200).send({data: updatedHomework});
     } catch (error) {
@@ -59,7 +60,7 @@ module.exports.deleteHomeworkById = async (req, res, next) => {
     try {
         const deletedHomework = await Homework.findByIdAndDelete(req.params.idHomework);
         if (!deletedHomework) {
-            return res.status(404).send({ data: 'Homework not found' });
+            return next(createError(404, 'Homework not found'));
         }
         res.status(200).send({ data: deletedHomework });
     } catch (error) {

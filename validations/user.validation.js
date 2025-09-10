@@ -14,4 +14,11 @@ const userSchemaUpdate = yup.object({
     age: yup.number().min(12).max(100),
 });
 
-module.exports = { userSchemaPost, userSchemaUpdate };
+const userSchemaQuery = yup.object({
+    gender: yup.string().trim().oneOf(['male', 'female']),
+    minAge: yup.number().min(12).max(100),
+    maxAge: yup.number().min(12).max(100),
+    login: yup.string().trim().min(1).max(15),
+});
+
+module.exports = { userSchemaPost, userSchemaUpdate, userSchemaQuery };
