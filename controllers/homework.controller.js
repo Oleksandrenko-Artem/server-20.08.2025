@@ -14,6 +14,7 @@ module.exports.createHomework = async (req, res, next) => {
 
 module.exports.findAllHomeworks = async (req, res, next) => {
     try {
+        const { limit, skip } = req.pagination;
         const { subject, task, deadline } = req.query;
         const filter = {};
         if (subject) {
@@ -25,7 +26,7 @@ module.exports.findAllHomeworks = async (req, res, next) => {
         if (deadline) {
             filter.deadline = { $lte: deadline };
         }
-        const homeworks = await Homework.find(filter);
+        const homeworks = await Homework.find(filter).skip(skip).limit(limit);
         res.status(200).send({ data: homeworks });
     } catch (error) {
         next(error);
