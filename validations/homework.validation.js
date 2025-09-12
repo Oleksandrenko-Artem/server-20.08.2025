@@ -1,20 +1,21 @@
 const yup = require('yup');
+const CONSTANTS = require('../constants');
 
 const homeworkSchemaPost = yup.object({
-    subject: yup.string().trim().min(3).max(64).required(),
-    task: yup.string().trim().min(5).max(255).required(),
+    subject: yup.string().trim().min(CONSTANTS.HOMEWORK_SUBJECT_MIN).max(CONSTANTS.HOMEWORK_SUBJECT_MAX).required(),
+    task: yup.string().trim().min(CONSTANTS.HOMEWORK_TASK_MIN).max(CONSTANTS.HOMEWORK_TASK_MAX).required(),
     deadline: yup.date(),
 });
 
 const homeworkSchemaUpdate = yup.object({
-    subject: yup.string().trim().min(3).max(64),
-    task: yup.string().trim().min(5).max(255),
+    subject: yup.string().trim().min(CONSTANTS.HOMEWORK_SUBJECT_MIN).max(CONSTANTS.HOMEWORK_SUBJECT_MAX),
+    task: yup.string().trim().min(CONSTANTS.HOMEWORK_TASK_MIN).max(CONSTANTS.HOMEWORK_TASK_MAX),
     deadline: yup.date().optional(),
 });
 
 const homeworkSchemaQuery = yup.object({
-    subject: yup.string().trim().min(1).max(64),
-    task: yup.string().trim().min(1).max(255),
+    subject: yup.string().trim().min(CONSTANTS.QUERY_MIN).max(CONSTANTS.HOMEWORK_SUBJECT_MAX),
+    task: yup.string().trim().min(CONSTANTS.QUERY_MIN).max(CONSTANTS.HOMEWORK_TASK_MAX),
     deadline: yup.date(),
 });
 

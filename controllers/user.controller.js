@@ -13,24 +13,7 @@ module.exports.createUser = async (req, res, next) => {
 module.exports.findAllUsers = async (req, res, next) => {
     try {
         const { limit, skip } = req.pagination;
-        const { gender, minAge, maxAge, login } = req.query;
-        const filter = {};
-        if (gender) {
-            filter.isMale = gender === 'male';
-        }
-        if (login) {
-            filter.login = new RegExp(login);
-        }
-        if (minAge || maxAge) {
-            filter.age = {};
-            if (minAge) {
-                filter.age.$gte = Number(minAge);
-            }
-            if (maxAge) {
-                filter.age.$lte = Number(maxAge);
-            }
-        }
-        const users = await User.find(filter).skip(skip).limit(limit);
+        const users = await User.find(req.filter).skip(skip).limit(limit);
         res.status(200).send({ data: users });
     } catch (error) {
         next(error);

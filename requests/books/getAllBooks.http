@@ -1,1 +1,1 @@
-GET http://localhost:3000/books?title=the&minYear=1900&maxYear=2000&available=yes HTTP/1.1
+GET http://localhost:3000/books?title=the&minYear=1999&maxYear=2000 HTTP/1.1

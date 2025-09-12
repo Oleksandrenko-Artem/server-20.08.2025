@@ -20,3 +20,22 @@ module.exports.validateHomeworkQuery = (queryHomeworkSchema) => async (req, res,
         next(createError(400, error.message));
     }
 };
+
+module.exports.buildHomeworksFilter = async (req, res, next) => {
+    try {
+        const { subject, task, deadline } = req.query;
+        req.filter = {};
+        if (subject) {
+            req.filter.subject = new RegExp(subject, 'i');
+        }
+        if (task) {
+            req.filter.task = new RegExp(task, 'i');
+        }
+        if (deadline) {
+            req.filter.deadline = { $lte: deadline };
+        }
+        next();
+    } catch (error) {
+        next(createError(400, error.message));
+    }
+};

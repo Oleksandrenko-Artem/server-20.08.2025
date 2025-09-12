@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const CONSTANTS = require('../constants');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -6,8 +7,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minLength: 5,
-        maxLength: 15,
+        minLength: CONSTANTS.USER_LOGIN_MIN,
+        maxLength: CONSTANTS.USER_LOGIN_MAX,
     },
     email: {
         type: String,
@@ -21,9 +22,9 @@ const userSchema = new Schema({
     },
     age: {
         type: Number,
-        default: 15,
-        min: 12,
-        max: 100,
+        default: CONSTANTS.USER_AGE_DEFAULT,
+        min: CONSTANTS.USER_AGE_MIN,
+        max: CONSTANTS.USER_AGE_MAX,
     },
 });
 

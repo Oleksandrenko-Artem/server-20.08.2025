@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const CONSTANTS = require('../constants');
 const { Schema } = mongoose;
 
 const homeworkSchema = new Schema({
@@ -6,15 +7,15 @@ const homeworkSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minLength: 3,
-        maxLength: 64,
+        minLength: CONSTANTS.HOMEWORK_SUBJECT_MIN,
+        maxLength: CONSTANTS.HOMEWORK_SUBJECT_MAX,
     },
     task: {
         type: String,
         required: true,
         trim: true,
-        minLength: 5,
-        maxLength: 255,
+        minLength: CONSTANTS.HOMEWORK_TASK_MIN,
+        maxLength: CONSTANTS.HOMEWORK_TASK_MAX,
     },
     deadline: {
         type: Date,
