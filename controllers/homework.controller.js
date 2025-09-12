@@ -3,12 +3,21 @@ const Homework = require("../models/Homework");
 
 // CRUD - create, read, update, delete
 
+module.exports.countHomeworks = async (req, res, next) => {
+    try {
+        const count = await Homework.countDocuments(req.filter);
+        res.status(200).send({ data: count });
+    } catch (error) {
+        next(createError(400, error.message));
+    }
+};
+
 module.exports.createHomework = async (req, res, next) => {
     try {
         const newHomework = await Homework.create(req.body);
         res.status(201).send({ data: newHomework });
     } catch (error) {
-        next(error);
+        next(createError(400, error.message));
     }
 };
 
@@ -18,7 +27,7 @@ module.exports.findAllHomeworks = async (req, res, next) => {
         const homeworks = await Homework.find(req.filter).skip(skip).limit(limit);
         res.status(200).send({ data: homeworks });
     } catch (error) {
-        next(error);
+        next(createError(400, error.message));
     }
 };
 
@@ -30,7 +39,7 @@ module.exports.findHomeworkById = async (req, res, next) => {
         }
         res.status(200).send({ data: homework });
     } catch (error) {
-        next(error);
+        next(createError(400, error.message));
     }
 };
 
@@ -42,7 +51,7 @@ module.exports.updateHomeworkById = async (req, res, next) => {
         }
         res.status(200).send({data: updatedHomework});
     } catch (error) {
-        next(error);
+        next(createError(400, error.message));
     }
 };
 
@@ -54,6 +63,6 @@ module.exports.deleteHomeworkById = async (req, res, next) => {
         }
         res.status(200).send({ data: deletedHomework });
     } catch (error) {
-        next(error);
+        next(createError(400, error.message));
     }
 };

@@ -2,8 +2,8 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "login": "john8",
-    "email": "john8@gmail.com",
+    "login": "den18",
+    "email": "den8@gmail.com",
     "isMale": true,
-    "age": 80
+    "age": 18
 }
