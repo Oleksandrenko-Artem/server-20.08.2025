@@ -4,6 +4,7 @@ const User = require('../models/User');
 module.exports.usersStatistic = async (req, res, next) => {
     try {
         const statistic = await User.aggregate([
+            { $match: { isMale: false } },
             {
                 $facet: {
                     countGender: [
